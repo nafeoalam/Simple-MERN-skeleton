@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -8,7 +8,7 @@ import { register, login } from '../../../Store/actions/authActions';
 import useStyles from './Styles';
 import Input from './Input';
 
-const initialState = { name: '', email: '', password: '', confirmPassword: '', mobile_no: '' };
+const initialState = { email: '', password: '', confirmPassword: '' };
 
 const Register = () => {
   const [form, setForm] = useState(initialState);
@@ -19,6 +19,8 @@ const Register = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => setShowPassword(!showPassword);
+
+  const [errorMessage, setErrorMessage] = useState('');
 
   const switchMode = () => {
     setForm(initialState);
@@ -36,6 +38,13 @@ const Register = () => {
     }
   };
 
+  const authReducer = useSelector((state) => state.authReducer);
+
+  useEffect(() => {
+    console.log(authReducer)
+    if (authReducer?.authData?.error) setErrorMessage(authReducer?.authData?.error)
+    else setErrorMessage('')
+  }, [authReducer]);
   // const success = async (res) => {
   //   const result = res?.profileObj;
   //   const token = res?.tokenId;
@@ -49,25 +58,24 @@ const Register = () => {
   //   }
   // };
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  }
 
   return (
     <Container component="main" maxWidth="xs">
       <Paper className={classes.paper} elevation={3}>
-        
+
         <Typography component="h1" variant="h5">{isRegister ? 'Register' : 'Login'}</Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
 
             <Input name="email" label="Email Address" handleChange={handleChange} />
             <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
-            {isRegister && (
-              <>
-                <Input name="name" label="Name" handleChange={handleChange} autoFocus />
-                <Input name="mobile_no" label="Mobile No" handleChange={handleChange} />
-              </>
-            )}
+            
             {isRegister && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" />}
+            <span className={classes.errorMessage}>{errorMessage}</span>
+
           </Grid>
           <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
             {isRegister ? 'Register' : 'Login'}

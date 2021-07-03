@@ -11,13 +11,8 @@ import { getPhotos } from '../Store/actions/dashboardActions'
 
 const App = () => {
 
-  const [errorMessage, setErrorMessage] = useState('');
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getPhotos());
-  }, [dispatch]);
-
+ 
   return (
     <Router>
       <div style={{ display: 'flex' }}>

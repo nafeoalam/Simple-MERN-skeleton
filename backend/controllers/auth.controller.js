@@ -8,9 +8,9 @@ import jwt from 'jsonwebtoken'
 const JWT_SECRET = 'xyz'
 
 export const registerCustomer = async (req, res) => {
-    const { name, email, password, mobile_no } = req.body;
+    const { email, password } = req.body;
     console.log(req.body)
-    if (!email || !password || !name) {
+    if (!email || !password) {
         return res.status(422).json({ error: "Please add all the fields" })
     }
 
@@ -51,8 +51,8 @@ export const loginCustomer = async (req, res) => {
 
         if (matchPassword) {
             const token = jwt.sign({ _id: savedCustomer._id }, JWT_SECRET)
-            const { _id, id, name, email, mobile_no } = savedCustomer
-            res.json({ token, customer: { _id, id, name, email, mobile_no } })
+            const { _id, id, email } = savedCustomer
+            res.json({ token, customer: { _id, id, email } })
         } else {
             res.status(422).json({ error: "Invalid Email or password" })
         }
