@@ -17,9 +17,9 @@ const Dish = ({ photoItem }) => {
     <Card className={classes.root}>
       <CardContent>
         <div className={classes.cardContent}>
-          {/* <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h5" component="h2">
             <img src={photoItem.img_src} alt="" />
-          </Typography> */}
+          </Typography>
           <Typography gutterBottom variant="h5" component="h2">
             {photoItem.earth_date}
           </Typography>

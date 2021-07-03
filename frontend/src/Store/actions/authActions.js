@@ -9,7 +9,6 @@ export const login = (formData, router) => async (dispatch) => {
 
     router.push('/dashboard');
   } catch (error) {
-    console.log(error)
     dispatch({ type: AUTH_LOGIN_FAILED, error });
   }
 };
@@ -19,11 +18,7 @@ export const register = (formData, router) => async (dispatch) => {
     const { data } = await api.register(formData);
 
     dispatch({ type: AUTH_REG, data });
-
-    router.push('/dashboard');
   } catch (error) {
-    console.log('error')
-
-    //dispatch({ type: AUTH_REG_FAILED, error });
+    dispatch({ type: AUTH_REG_FAILED, error });
   }
 };

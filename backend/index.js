@@ -24,7 +24,7 @@ app.use('/auth', AuthRoutes);
 //Mongo
 const mongoUserName = 'nafeojoy';
 const mongoPassword = '1234';
-const mongoDbName = 'chefonline'
+const mongoDbName = 'tuliptech'
 const CONNECTION_URL = `mongodb+srv://${mongoUserName}:${mongoPassword}@cluster0.lq4xh.gcp.mongodb.net/${mongoDbName}?retryWrites=true&w=majority`; //Mongo Connection
 
 const PORT = process.env.PORT || 5000;

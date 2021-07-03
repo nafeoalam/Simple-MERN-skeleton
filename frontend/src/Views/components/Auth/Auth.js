@@ -43,20 +43,13 @@ const Register = () => {
   useEffect(() => {
     console.log(authReducer)
     if (authReducer?.authData?.error) setErrorMessage(authReducer?.authData?.error)
+    else if (authReducer?.authData?.email) {
+      setIsRegister(false);
+      setErrorMessage('')
+    }
     else setErrorMessage('')
   }, [authReducer]);
-  // const success = async (res) => {
-  //   const result = res?.profileObj;
-  //   const token = res?.tokenId;
 
-  //   try {
-  //     dispatch({ type: AUTH, data: { result, token } });
-
-  //     history.push('/');
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -72,7 +65,7 @@ const Register = () => {
 
             <Input name="email" label="Email Address" handleChange={handleChange} />
             <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
-            
+
             {isRegister && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" />}
             <span className={classes.errorMessage}>{errorMessage}</span>
 
