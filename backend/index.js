@@ -1,3 +1,5 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
@@ -22,9 +24,9 @@ app.use('/auth', AuthRoutes);
 
 
 //Mongo
-const mongoUserName = 'nafeojoy';
-const mongoPassword = '1234';
-const mongoDbName = 'tuliptech'
+const mongoUserName = process.env.MONGO_UserName;
+const mongoPassword = process.env.MONGO_Password;
+const mongoDbName = process.env.MONGO_DbName;
 const CONNECTION_URL = `mongodb+srv://${mongoUserName}:${mongoPassword}@cluster0.lq4xh.gcp.mongodb.net/${mongoDbName}?retryWrites=true&w=majority`; //Mongo Connection
 
 const PORT = process.env.PORT || 5000;
