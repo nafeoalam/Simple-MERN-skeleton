@@ -13,7 +13,8 @@ API.interceptors.request.use((req) => {
 
 
 //PHOTO
-const demoKey = 'fUQlDFM4UWdHt0QI2ikVhFfAYIVUCS8hHYeEDYvD';
+//const demoKey = 'fUQlDFM4UWdHt0QI2ikVhFfAYIVUCS8hHYeEDYvD';
+const demoKey = process.env.REACT_APP_NASA_DEMO_KEY;
 const photos = `/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=${demoKey}`;
 export const fetchPhotos = () => nasaAPI.get(photos);
 
